@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "575197193611",
+    "firebase_url": "https://goodbookback.firebaseio.com",
+    "project_id": "goodbookback",
+    "storage_bucket": "goodbookback.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575197193611:android:288dba13c03ef9cc",
+        "android_client_info": {
+          "package_name": "com.bilalfakhro.good_book_back"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575197193611-ec404uoq8f3cc3e5d848sus2dmp8qm81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSv87zdYE-2-qgdSr_Z73sjkMes1ouE7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575197193611-ec404uoq8f3cc3e5d848sus2dmp8qm81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
