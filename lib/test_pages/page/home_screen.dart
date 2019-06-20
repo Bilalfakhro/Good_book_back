@@ -3,7 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:good_book_back/data/book_data.dart';
 import 'package:good_book_back/pages/detail.dart';
 import 'package:good_book_back/services/auth.dart';
-import 'package:good_book_back/test_pages/page/pages_screen.dart';
+import 'package:good_book_back/test_pages/page/profile_screen.dart';
+
+import '../bottom_navigation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -20,6 +22,91 @@ class _HomeScreenState extends State<HomeScreen>
   ScrollController _scrollViewController;
   AnimationController _animationController;
   List<Posts> postsList = <Posts>[];
+  var title = ' ';
+
+  Drawer _buildDrawer(context) {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountEmail: Text(
+              "bramvbilsen@gmail.com",
+              style: Theme.of(context).textTheme.subhead,
+              textAlign: TextAlign.start,
+            ),
+            accountName: Text(
+              "Bramvbilsen",
+              style: Theme.of(context).textTheme.subhead,
+              textAlign: TextAlign.start,
+            ),
+            currentAccountPicture: GestureDetector(
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(currentProfilePic),
+              ),
+              onTap: () => print("This is your current account."),
+            ),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://img00.deviantart.net/35f0/i/2015/018/2/6/low_poly_landscape__the_river_cut_by_bv_designs-d8eib00.jpg"),
+                    fit: BoxFit.fill)),
+          ),
+          ListTile(
+              title: Text(
+                "Home",
+                style: Theme.of(context).textTheme.headline,
+                textAlign: TextAlign.start,
+              ),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        BottomNavigationWidget()));
+              }),
+          ListTile(
+              title: Text(
+                "Profile",
+                style: Theme.of(context).textTheme.headline,
+                textAlign: TextAlign.start,
+              ),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => ProfileScreen(
+                          auth: Auth(),
+                        )));
+              }),
+          Divider(),
+          ListTile(
+            title: Text(
+              "Cancel",
+              style: Theme.of(context).textTheme.headline,
+              textAlign: TextAlign.start,
+            ),
+            trailing: Icon(Icons.cancel),
+            onTap: () => Navigator.pop(context),
+          ),
+          Divider(),
+          ListTile(
+            title: Text(
+              "Log out",
+              style: Theme.of(context).textTheme.headline,
+              textAlign: TextAlign.start,
+            ),
+            trailing: Icon(Icons.power_settings_new),
+            onTap: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String currentProfilePic =
+      "https://avatars3.githubusercontent.com/u/16825392?s=460&v=4";
+  String otherProfilePic =
+      "https://yt3.ggpht.com/-2_2skU9e2Cw/AAAAAAAAAAI/AAAAAAAAAAA/6NpH9G8NWf4/s900-c-k-no-mo-rj-c0xffffff/photo.jpg";
 
   @override
   void initState() {
@@ -74,74 +161,61 @@ class _HomeScreenState extends State<HomeScreen>
     _animationController.forward();
 
     return Scaffold(
-        body: NestedScrollView(
-      controller: _scrollViewController,
-      // animation: _animationController,
-      headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
-        return <Widget>[
-          SliverAppBar(
-            backgroundColor: Colors.white.withOpacity(0.5),
-            expandedHeight: 200.0,
+      body: NestedScrollView(
+        controller: _scrollViewController,
+        // animation: _animationController,
+        headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              backgroundColor: Colors.white.withOpacity(0.5),
+              expandedHeight: 200.0,
 //            floating: true,
-            pinned: true,
-            forceElevated: boxIsScrolled,
-            actions: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: IconButton(
-                  icon: Icon(Icons.menu),
-                  color: Colors.deepOrangeAccent,
-                  onPressed: (){
-                  Navigator.of(context).pop();
-                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => PagesScreen()));
-                  }
-                ),
-              ),
-                IconButton(
-            padding: EdgeInsets.only(right: 15.0),
-            icon: Icon(Icons.power_settings_new),
-            iconSize: 40.0,
-            onPressed: _signOut,
+              pinned: true,
+              forceElevated: boxIsScrolled,
+              // IconButton(
+              //   padding: EdgeInsets.only(right: 15.0),
+              //   icon: Icon(Icons.power_settings_new),
+              //   iconSize: 40.0,
+              //   onPressed: _signOut,
+              // ),
+              // ],
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text('Good Book Back'),
+                  background: Image.network(
+                    "https://www.snapphotography.co.nz/wp-content/uploads/New-Zealand-Landscape-Photography-prints-12.jpg",
+                    fit: BoxFit.cover,
+                  )),
+            ),
+          ];
+        },
+        body: Container(
+          child: Center(
+            child: postsList.length == 0
+                ? Text(
+                    'No Book post are available',
+                    style: Theme.of(context).textTheme.title,
+                    textAlign: TextAlign.center,
+                  )
+                : ListView.builder(
+                    itemCount: postsList.length,
+                    itemBuilder: (_, index) {
+                      return postUI(
+                        postsList[index].image,
+                        postsList[index].bookTitle,
+                        postsList[index].description,
+                        postsList[index].writer,
+                        postsList[index].price,
+                        postsList[index].location,
+                        postsList[index].date,
+                        postsList[index].time,
+                      );
+                    }),
           ),
-            ],
-             
-        
-     
-            flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text('Good Book Back'),
-                background: Image.network(
-                  "https://www.snapphotography.co.nz/wp-content/uploads/New-Zealand-Landscape-Photography-prints-12.jpg",
-                  fit: BoxFit.cover,
-                )),
-          )
-        ];
-      },
-      body: Container(
-        child: Center(
-          child: postsList.length == 0
-              ? Text(
-                  'No Book post are available',
-                  style: Theme.of(context).textTheme.title,
-                  textAlign: TextAlign.center,
-                )
-              : ListView.builder(
-                  itemCount: postsList.length,
-                  itemBuilder: (_, index) {
-                    return postUI(
-                      postsList[index].image,
-                      postsList[index].bookTitle,
-                      postsList[index].description,
-                      postsList[index].writer,
-                      postsList[index].price,
-                      postsList[index].location,
-                      postsList[index].date,
-                      postsList[index].time,
-                    );
-                  }),
         ),
       ),
-    ));
+      drawer: _buildDrawer(context),
+    );
   }
 
   Widget postUI(
@@ -203,11 +277,11 @@ class _HomeScreenState extends State<HomeScreen>
                       Container(
                         width: 300.0,
                         height: 400.0,
-                        decoration: new BoxDecoration(
+                        decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
-                            image: new DecorationImage(
+                            image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: new NetworkImage(image),
+                              image: NetworkImage(image),
                             ),
                             borderRadius: BorderRadius.circular(20.0)),
                       ),
