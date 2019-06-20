@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:good_book_back/card_pages/styles.dart';
 import 'package:good_book_back/data/book_data.dart';
 import 'package:good_book_back/pages/detail.dart';
 import 'package:good_book_back/services/auth.dart';
+import 'package:good_book_back/styleguide/text_styles.dart';
 import 'package:good_book_back/test_pages/page/profile_screen.dart';
-
 import '../bottom_navigation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,25 +26,30 @@ class _HomeScreenState extends State<HomeScreen>
   var title = ' ';
 
   Drawer _buildDrawer(context) {
+    var valueTextStyle;
     return Drawer(
       child: ListView(
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountEmail: Text(
-              "bramvbilsen@gmail.com",
-              style: Theme.of(context).textTheme.subhead,
-              textAlign: TextAlign.start,
-            ),
-            accountName: Text(
-              "Bramvbilsen",
-              style: Theme.of(context).textTheme.subhead,
-              textAlign: TextAlign.start,
-            ),
-            currentAccountPicture: GestureDetector(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(currentProfilePic),
+          DrawerHeader(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: new BorderRadius.circular(50.0),
+                    child: Image.asset(
+                      'assets/StoryOfMe.jpg',
+                      height: 100.0,
+                      width: 100.0,
+                    ),
+                  ),
+                  SizedBox(height: 5.0,),
+                  Text(
+                    'Your Name',
+                    style: Styles.activeSeasonText,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              onTap: () => print("This is your current account."),
             ),
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -51,53 +57,11 @@ class _HomeScreenState extends State<HomeScreen>
                         "https://img00.deviantart.net/35f0/i/2015/018/2/6/low_poly_landscape__the_river_cut_by_bv_designs-d8eib00.jpg"),
                     fit: BoxFit.fill)),
           ),
-          ListTile(
-              title: Text(
-                "Home",
-                style: Theme.of(context).textTheme.headline,
-                textAlign: TextAlign.start,
-              ),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        BottomNavigationWidget()));
-              }),
-          ListTile(
-              title: Text(
-                "Profile",
-                style: Theme.of(context).textTheme.headline,
-                textAlign: TextAlign.start,
-              ),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => ProfileScreen(
-                          auth: Auth(),
-                        )));
-              }),
+          CustomListTitle(Icons.home, 'Home', () => {}),
+          CustomListTitle(Icons.person, 'Profile', () => {}),
           Divider(),
-          ListTile(
-            title: Text(
-              "Cancel",
-              style: Theme.of(context).textTheme.headline,
-              textAlign: TextAlign.start,
-            ),
-            trailing: Icon(Icons.cancel),
-            onTap: () => Navigator.pop(context),
-          ),
-          Divider(),
-          ListTile(
-            title: Text(
-              "Log out",
-              style: Theme.of(context).textTheme.headline,
-              textAlign: TextAlign.start,
-            ),
-            trailing: Icon(Icons.power_settings_new),
-            onTap: () => Navigator.pop(context),
-          ),
+          CustomListTitle(Icons.cancel, 'Cancel', () => {}),
+          CustomListTitle(Icons.lock, 'Log out', () => {}),
         ],
       ),
     );
@@ -371,6 +335,47 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         )
       ],
+    );
+  }
+}
+
+class CustomListTitle extends StatelessWidget {
+  IconData icons;
+  String text;
+  Function onTap;
+
+  CustomListTitle(this.icons, this.text, this.onTap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: InkWell(
+        splashColor: Colors.deepOrangeAccent,
+        onTap: () => {},
+        child: Container(
+          height: 44.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(icons),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      text,
+                      style: Styles.inactiveSeasonText,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ],
+              ),
+              Icon(Icons.arrow_right),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:good_book_back/services/auth.dart';
 import 'package:good_book_back/test_pages/page/profile_screen.dart';
 import 'page/image_screen.dart';
 import 'page/home_screen.dart';
-import 'page/pages_screen.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   BottomNavigationWidget({this.onSignedOut, this.auth});
@@ -27,15 +26,6 @@ class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       // ..add(PagesScreen())
       ..add(ProfileScreen());
     super.initState();
-  }
-
-  void _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e.toString());
-    }
   }
 
   @override

@@ -59,6 +59,22 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
+    static const activeSeasonText20 = TextStyle(
+    color: Color.fromRGBO(255, 255, 255, 0.9),
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
+  static const inactiveSeasonText20 = TextStyle(
+    color: Color.fromRGBO(80, 80, 80, 0.9),
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static const cardTitleText = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.9),
     fontFamily: 'NotoSans',

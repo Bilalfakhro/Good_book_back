@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                         height: 50.0,
                         width: 50.0,
                         color: Colors.tealAccent,
-                        child: Center(child: Text('${price}' + ' KR'),),
+                        child: Center(child: Text('$price' + ' KR'),),
                       ),
                     ],
                   ),
