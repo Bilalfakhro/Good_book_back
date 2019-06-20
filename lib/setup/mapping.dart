@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:good_book_back/pages/home_page.dart';
 import 'package:good_book_back/services/auth.dart';
 import 'package:good_book_back/setup/login_page.dart';
-
+import 'package:good_book_back/test_pages/bottom_navigation_widget.dart';
 
 class MappingPage extends StatefulWidget {
   final BaseAuth auth;
@@ -54,7 +53,7 @@ class _MappingPageState extends State<MappingPage> {
       case AuthStatus.notSignedIn:
         return LoginPage(auth: widget.auth, onSignedIn: _signedIn);
       case AuthStatus.signedIn:
-        return HomePage(
+        return BottomNavigationWidget(
           auth: widget.auth,
           onSignedOut: _signOut,
         );

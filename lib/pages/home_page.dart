@@ -1,10 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:good_book_back/data/book_data.dart';
-import 'package:good_book_back/pages/photoUpload_page.dart';
 import 'package:good_book_back/services/auth.dart';
 import 'package:good_book_back/styleguide/text_styles.dart';
-
 import 'detail.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         Posts posts = Posts(
           bookData[individualKey]['Image'],
           bookData[individualKey]['Title'],
-          bookData[individualKey]['Writer'],
+          bookData[individualKey]['Author'],
           bookData[individualKey]['Description'],
           bookData[individualKey]['Price'],
           bookData[individualKey]['Location'],
@@ -75,6 +73,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      
+
       body: Container(
         child: Center(
           child: postsList.length == 0
@@ -97,46 +97,6 @@ class _HomePageState extends State<HomePage> {
                       postsList[index].time,
                     );
                   }),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.teal,
-        child: Container(
-          margin: const EdgeInsets.only(left: 50.0, right: 50.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home),
-                iconSize: 50.0,
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return HomePage();
-                  }));
-                  print('Go to add image clicked');
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.add_a_photo),
-                iconSize: 50.0,
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return UploadPhotoPage();
-                  }));
-                  print('Go to add image clicked');
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.person),
-                iconSize: 50.0,
-                color: Colors.white,
-                onPressed: null,
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -177,42 +137,52 @@ class _HomePageState extends State<HomePage> {
               },
               child: Column(
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10.0, left: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          date,
+                          style: Theme.of(context).textTheme.subhead,
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          time,
+                          style: Theme.of(context).textTheme.subhead,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        date,
-                        style: Theme.of(context).textTheme.subhead,
-                        textAlign: TextAlign.center,
+                      Container(
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                          height: 240,
+                          width: 180,
+                        ),
                       ),
-                      Text(
-                        time,
-                        style: Theme.of(context).textTheme.subhead,
-                        textAlign: TextAlign.center,
+                      Container(
+                        height: 50.0,
+                        width: 50.0,
+                        color: Colors.tealAccent,
+                        child: Center(child: Text('${price}' + ' KR'),),
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-
-                  Container(
-                    
-                    child: Image.network(
-                      image, 
-                    fit: BoxFit.cover,
-                    height: 240,
-                    width: 180,
-                    ),
-                    
-                    ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
                   Text(
                     bookTitle,
                     style: headingStyle,
-                    // style: Theme.of(context).textTheme.title,
                     textAlign: TextAlign.start,
                   ),
                   Text(
@@ -225,7 +195,6 @@ class _HomePageState extends State<HomePage> {
                     style: Theme.of(context).textTheme.title,
                     textAlign: TextAlign.center,
                     maxLines: 1,
-                    
                   ),
                   Text(
                     '$price' + ' kr',
@@ -237,11 +206,17 @@ class _HomePageState extends State<HomePage> {
                     style: Theme.of(context).textTheme.title,
                     textAlign: TextAlign.center,
                   ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  
                 ],
               ),
+              
             ),
           ],
         ),
+        
       ),
     );
   }

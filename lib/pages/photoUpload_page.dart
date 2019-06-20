@@ -63,8 +63,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
 
   void saveToDataBase(url) {
     var dbTimeKey = DateTime.now();
-    var formatDate = new DateFormat('MMM d, yyyy');
-    var formatTime = new DateFormat('EEEE, hh:mm aaa');
+    var formatDate =  DateFormat('MMM d, yyyy');
+    var formatTime =  DateFormat('EEEE, hh:mm aaa');
 
     String date = formatDate.format(dbTimeKey);
     String time = formatTime.format(dbTimeKey);
@@ -74,8 +74,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     var data = {
       'Image': url,
       'Title': _bookTitle,
-      'Writer': _bookWriter,
-      'Description': _bookDesc,
+      'Author': _bookWriter,
+      'Descriptions': _bookDesc,
       'Price': _bookPrice,
       'Location': _bookLocation,
       "Date": date,
@@ -100,10 +100,13 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       body: Center(
         child: sampleImage == null ? Text('Select an image') : enableUpload(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
-        tooltip: 'Add Image',
-        child: Icon(Icons.add_a_photo),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 18.0, bottom: 18.0),
+        child: FloatingActionButton(
+          onPressed: getImage,
+          tooltip: 'Add Image',
+          child: Icon(Icons.add_a_photo),
+        ),
       ),
     );
   }
@@ -114,73 +117,104 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            Image.file(sampleImage, height: 330.0, width: 660.0),
-            SizedBox(
-              height: 15.0,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Book Title',
-                  hintText: 'Cad Series : Google Sketchup 3D'),
-              validator: (value) =>
-                  value.isEmpty ? 'Book Title is required!' : null,
-              onSaved: (value) => _bookTitle = value,
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Description',
-                  hintText: 'This book is about Sketch 3D'),
-              validator: (value) =>
-                  value.isEmpty ? 'Description is required!' : null,
-              onSaved: (value) => _bookDesc = value,
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            TextFormField(
-              decoration:
-                  InputDecoration(labelText: 'Writer', hintText: 'John Rambo'),
-              validator: (value) =>
-                  value.isEmpty ? 'Writer is required!' : null,
-              onSaved: (value) => _bookWriter = value,
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Pirce', hintText: '10 €'),
-              validator: (value) => value.isEmpty ? 'Pirce is required!' : null,
-              onSaved: (value) => _bookPrice = value,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Location', hintText: 'London, UK'),
-              validator: (value) =>
-                  value.isEmpty ? 'Location is required!' : null,
-              onSaved: (value) => _bookLocation = value,
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            RaisedButton(
-              // key: Key('signIn'),
-              color: Colors.teal,
-              elevation: 7.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              onPressed: uploadStatusImage,
-              child: Center(
-                child: Text(
-                  'Add a New Post',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat'),
+            Container(
+              height: 160, width: 110,
+                child: Image.file(
+                  sampleImage, 
+             )
                 ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Book Title',
+                    hintText: 'Cad Series : Google Sketchup 3D'),
+                validator: (value) =>
+                    value.isEmpty ? 'Book Title is required!' : null,
+                onSaved: (value) => _bookTitle = value,
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Description',
+                    hintText: 'This book is about Sketch 3D'),
+                validator: (value) =>
+                    value.isEmpty ? 'Description is required!' : null,
+                onSaved: (value) => _bookDesc = value,
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Writer', hintText: 'John Rambo'),
+                validator: (value) =>
+                    value.isEmpty ? 'Writer is required!' : null,
+                onSaved: (value) => _bookWriter = value,
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: TextFormField(
+                decoration:
+                    InputDecoration(labelText: 'Pirce', hintText: '10 €'),
+                validator: (value) =>
+                    value.isEmpty ? 'Pirce is required!' : null,
+                onSaved: (value) => _bookPrice = value,
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Location', hintText: 'London, UK'),
+                validator: (value) =>
+                    value.isEmpty ? 'Location is required!' : null,
+                onSaved: (value) => _bookLocation = value,
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: RaisedButton(
+                // key: Key('signIn'),
+                color: Colors.teal,
+                elevation: 7.0,
+
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+
+                onPressed: uploadStatusImage,
+                child: Center(
+                  child: Text(
+                    'Add a  Post',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat'),
+                  ),
+                ),
+                
               ),
             ),
           ],

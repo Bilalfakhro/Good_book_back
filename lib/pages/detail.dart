@@ -55,7 +55,7 @@ class Detail extends StatelessWidget {
           children: <Widget>[
             text(
               '${posts.price}' + ' kr',
-              // '${book.price}',
+              
               size: 18,
               isBold: true,
               padding: EdgeInsets.only(top: 10.0),
