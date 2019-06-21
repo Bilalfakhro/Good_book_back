@@ -1,6 +1,10 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:good_book_back/setup/loginpage.dart';
+import 'package:good_book_back/setup/registerpage.dart';
+import 'package:good_book_back/test_pages/bottom_navigation_widget.dart';
+import 'package:good_book_back/test_pages/page/home_screen.dart';
 import 'setup/mapping.dart';
 import 'services/auth.dart';
 
@@ -25,6 +29,11 @@ Future<void> main() async {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MappingPage(auth: Auth()),
+      home: MappingPage(auth: Auth(),),
+      routes: {
+        '/homePage':(context)=>BottomNavigationWidget(),
+        '/loginPage':(context)=>LoginPage(),
+        '/registerPage':(context)=>RegisterPage(),
+      },
     ));
 }

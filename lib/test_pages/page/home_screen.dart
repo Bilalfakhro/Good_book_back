@@ -1,18 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:good_book_back/card_pages/styles.dart';
 import 'package:good_book_back/data/book_data.dart';
 import 'package:good_book_back/pages/detail.dart';
 import 'package:good_book_back/services/auth.dart';
-import 'package:good_book_back/styleguide/text_styles.dart';
-import 'package:good_book_back/test_pages/page/profile_screen.dart';
-import '../bottom_navigation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
+
   HomeScreen({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
+  int id = 0;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen>
   var title = ' ';
 
   Drawer _buildDrawer(context) {
-    var valueTextStyle;
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -42,7 +41,9 @@ class _HomeScreenState extends State<HomeScreen>
                       width: 100.0,
                     ),
                   ),
-                  SizedBox(height: 5.0,),
+                  SizedBox(
+                    height: 5.0,
+                  ),
                   Text(
                     'Your Name',
                     style: Styles.activeSeasonText,
@@ -61,7 +62,38 @@ class _HomeScreenState extends State<HomeScreen>
           CustomListTitle(Icons.person, 'Profile', () => {}),
           Divider(),
           CustomListTitle(Icons.cancel, 'Cancel', () => {}),
-          CustomListTitle(Icons.lock, 'Log out', () => {}),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+            child: InkWell(
+              splashColor: Colors.deepOrangeAccent,
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/loginPage');
+              },
+              child: Container(
+                height: 44.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.lock),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Log Out',
+                            style: Styles.inactiveSeasonText,
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Icon(Icons.arrow_right),
+                  ],
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
