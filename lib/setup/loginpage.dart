@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:good_book_back/card_pages/styles.dart';
 import 'registerpage.dart';
+
 
 class LoginPage extends StatefulWidget {
   static const String routeName = "/loginPage";
@@ -17,13 +19,13 @@ class _LoginPageState extends State<LoginPage> {
 
   FirebaseAuth mauth = FirebaseAuth.instance;
   signin() async {
-    String Email = email.text;
-    String Password = password.text;
+    String _email = email.text;
+    String _password = password.text;
 
     await mauth
         .signInWithEmailAndPassword(
-      email: Email,
-      password: Password,
+      email: _email,
+      password: _password,
     )
         .then((FirebaseUser user) {
       setState(() {
@@ -90,18 +92,14 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.fromLTRB(15.0, 50.0, 0.0, 0.0),
                     child: Text(
                       'Login',
-                      style: TextStyle(
-                          fontSize: 80.0, fontWeight: FontWeight.bold),
+                      style: Styles.logInLogoText,
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(220.0, 50.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(220.0, 60.0, 0.0, 0.0),
                     child: Text(
                       '.',
-                      style: TextStyle(
-                          fontSize: 80.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal),
+                      style: Styles.dotLogoText,
                     ),
                   )
                 ],
@@ -142,7 +140,8 @@ class _LoginPageState extends State<LoginPage> {
             labelText: "Password",
             hintText: "Password",
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              borderRadius: BorderRadius.all(Radius.circular(10.0),
+              ),
             ),
           ),
         ),
@@ -163,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(25.0),
             elevation: 7.0,
             child: RaisedButton(
-              color: Colors.teal,
+              color: Colors.deepOrangeAccent,
               elevation: 7.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -172,10 +171,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: Text(
                   'LOGIN',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat'),
+                  style: Styles.buttonsText,
                 ),
               ),
             ),
@@ -195,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Text(
             'New to Good Book Back?  ',
-            style: TextStyle(fontFamily: 'Montserrat'),
+            style: Styles.minorText,
           ),
           SizedBox(width: 5.0),
           InkWell(
@@ -204,12 +200,7 @@ class _LoginPageState extends State<LoginPage> {
             },
             child: Text(
               'REGISTER',
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.teal,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline),
+              style: Styles.flatButtonsText,
             ),
           )
         ],

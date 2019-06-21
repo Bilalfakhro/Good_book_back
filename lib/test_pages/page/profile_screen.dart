@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_book_back/card_pages/styles.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -12,7 +13,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-        title: Text('Welocme'),
+        automaticallyImplyLeading: false, 
+        title: Text('Welocme', style: Styles.appBarTiitle,),
         centerTitle: true,
       ),
       body: Container(

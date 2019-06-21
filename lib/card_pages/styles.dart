@@ -3,8 +3,62 @@ import 'package:flutter/widgets.dart';
 import 'data/bookie.dart';
 
 abstract class Styles {
+
+//********** LOGOIN & REGISTRATION **********/
+  static const logInLogoText = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8), // Black
+    fontFamily: 'NotoSans',
+    fontSize: 80.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const signInLogoText = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8), // Black
+    fontFamily: 'NotoSans',
+    fontSize: 70.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+   static const dotLogoText = TextStyle(
+    color: Color.fromRGBO(255, 87, 34, 1), //Deep Orange Accent
+    fontFamily: 'NotoSans',
+    fontSize: 70.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const buttonsText = TextStyle(
+    color: Color.fromRGBO(240, 240, 240, 1.0), // Antic White
+    fontFamily: 'NotoSans',
+    fontSize: 24.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const flatButtonsText = TextStyle(
+    color: Color.fromRGBO(255, 87, 34, 1), //Deep Orange Accent
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.underline,
+  );
+
+//********** SUBMENU **********/
+  static const subMenuText = TextStyle(
+    color: Color.fromRGBO(80, 80, 80, 0.9), // Light Black
+    fontFamily: 'NotoSans',
+    fontSize: 22.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
+
+//********** TEXT **********/
   static const headlineText = TextStyle(
-    color: Color.fromRGBO(0, 0, 0, 0.8),
+    color: Color.fromRGBO(0, 0, 0, 0.8), // Black
     fontFamily: 'NotoSans',
     fontSize: 32.0,
     fontStyle: FontStyle.normal,
@@ -20,7 +74,7 @@ abstract class Styles {
   );
 
   static const minorText = TextStyle(
-    color: Color.fromRGBO(128, 128, 128, 1.0),
+    color: Color.fromRGBO(128, 128, 128, 1.0), // Light Grey
     fontFamily: 'NotoSans',
     fontSize: 16.0,
     fontStyle: FontStyle.normal,
@@ -28,17 +82,49 @@ abstract class Styles {
   );
 
   static const headlineName = TextStyle(
-    color: Color.fromRGBO(0, 0, 0, 0.9),
+    color: Color.fromRGBO(0, 0, 0, 0.9), // Black
     fontFamily: 'NotoSans',
     fontSize: 24.0,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
 
+   static const appBarTiitle = TextStyle(
+    color: Color.fromRGBO(255, 255, 255, 0.9), // White
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
+    static const titleText = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.9), // Black
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static const headlineDescription = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.8),
     fontFamily: 'NotoSans',
     fontSize: 16.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
+   static const descriptionText = TextStyle(
+    color: Color.fromRGBO(128, 128, 128, 1.0), // Light Grey
+    fontFamily: 'NotoSans',
+    fontSize: 16.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
+    static const priceText = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.8), // Black
+    fontFamily: 'NotoSans',
+    fontSize: 20.0,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
   );
@@ -59,7 +145,7 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
-    static const activeSeasonText20 = TextStyle(
+  static const activeSeasonText20 = TextStyle(
     color: Color.fromRGBO(255, 255, 255, 0.9),
     fontFamily: 'NotoSans',
     fontSize: 20.0,
@@ -99,6 +185,7 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
+//********** COLORS **********/
   static const appBackground = Color(0xffd0d0d0);
 
   static const scaffoldBackground = Color(0xfff0f0f0);

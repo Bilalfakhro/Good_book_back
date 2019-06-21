@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:good_book_back/services/auth.dart';
 import 'package:good_book_back/setup/loginpage.dart';
+import 'package:good_book_back/setup/mapping.dart';
 import 'package:good_book_back/setup/registerpage.dart';
 import 'package:good_book_back/test_pages/bottom_navigation_widget.dart';
-import 'package:good_book_back/test_pages/page/home_screen.dart';
-import 'setup/mapping.dart';
-import 'services/auth.dart';
 
 Future<void> main() async {
   final FirebaseApp app = await FirebaseApp.configure(

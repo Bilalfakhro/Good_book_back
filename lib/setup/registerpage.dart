@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:good_book_back/card_pages/styles.dart';
 import 'loginpage.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -97,18 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
                     child: Text(
                       'Register',
-                      style: TextStyle(
-                          fontSize: 70.0, fontWeight: FontWeight.bold),
+                      style: Styles.signInLogoText,
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(265.0, 43.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(265.0, 53.0, 0.0, 0.0),
                     child: Text(
                       '.',
-                      style: TextStyle(
-                          fontSize: 80.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal),
+                      style: Styles.dotLogoText,
                     ),
                   )
                 ],
@@ -127,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: TextField(
           controller: name,
           decoration: InputDecoration(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_add),
             labelText: "Name",
             hintText: "Name",
             border: OutlineInputBorder(
@@ -187,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
             borderRadius: BorderRadius.circular(25.0),
             elevation: 7.0,
             child: RaisedButton(
-              color: Colors.teal,
+              color: Colors.deepOrangeAccent,
               elevation: 7.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -196,10 +193,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Center(
                 child: Text(
                   'SIGN IN',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat'),
+                  style: Styles.buttonsText,
                 ),
               ),
             ),
@@ -219,7 +213,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: <Widget>[
           Text(
             'You have an account?  ',
-            style: TextStyle(fontFamily: 'Montserrat'),
+            style: Styles.minorText,
           ),
           SizedBox(width: 5.0),
           InkWell(
@@ -228,12 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
             },
             child: Text(
               'LOGIN',
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.teal,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline),
+              style: Styles.flatButtonsText,
             ),
           )
         ],

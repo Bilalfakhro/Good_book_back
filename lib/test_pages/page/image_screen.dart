@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_book_back/card_pages/styles.dart';
 import 'package:image_picker_ui/image_picker_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -114,10 +115,17 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
-          'widget.title',
-          style: TextStyle(color: Colors.white),
+          'Add Piccture',
+          style: Styles.appBarTiitle,
         ),
+             actions: <Widget>[
+           new IconButton(
+             icon: new Icon(Icons.close),
+            onPressed: () => Navigator.of(context).pop(null),
+           ),
+         ],
       ),
       body: GestureDetector(
         onTap: () => imagePicker.showDialog(context),
@@ -144,7 +152,9 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 24.0),
                                 child: Text(
-                                    'Add image by cliking on the camera icon'),
+                                  'Add image by cliking on the camera icon',
+                                  style: Styles.headlineDescription,
+                                ),
                               ),
                             ),
                           ),
@@ -269,7 +279,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>
                           ),
                         ),
                       ),
-                         SizedBox(
+                      SizedBox(
                         height: 45.0,
                       ),
                     ],

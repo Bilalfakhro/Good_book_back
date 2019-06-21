@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen>
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'Log Out',
-                            style: Styles.inactiveSeasonText,
+                            style: Styles.subMenuText,
                             textAlign: TextAlign.start,
                           ),
                         ),
@@ -98,11 +98,6 @@ class _HomeScreenState extends State<HomeScreen>
       ),
     );
   }
-
-  String currentProfilePic =
-      "https://avatars3.githubusercontent.com/u/16825392?s=460&v=4";
-  String otherProfilePic =
-      "https://yt3.ggpht.com/-2_2skU9e2Cw/AAAAAAAAAAI/AAAAAAAAAAA/6NpH9G8NWf4/s900-c-k-no-mo-rj-c0xffffff/photo.jpg";
 
   @override
   void initState() {
@@ -143,14 +138,14 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  void _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  // void _signOut() async {
+  //   try {
+  //     await widget.auth.signOut();
+  //     widget.onSignedOut();
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +154,6 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       body: NestedScrollView(
         controller: _scrollViewController,
-        // animation: _animationController,
         headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
           return <Widget>[
             SliverAppBar(
@@ -168,16 +162,12 @@ class _HomeScreenState extends State<HomeScreen>
 //            floating: true,
               pinned: true,
               forceElevated: boxIsScrolled,
-              // IconButton(
-              //   padding: EdgeInsets.only(right: 15.0),
-              //   icon: Icon(Icons.power_settings_new),
-              //   iconSize: 40.0,
-              //   onPressed: _signOut,
-              // ),
-              // ],
               flexibleSpace: FlexibleSpaceBar(
+                  title: Text(
+                    'Good Book Back',
+                    style: Styles.appBarTiitle,
+                  ),
                   centerTitle: true,
-                  title: Text('Good Book Back'),
                   background: Image.network(
                     "https://www.snapphotography.co.nz/wp-content/uploads/New-Zealand-Landscape-Photography-prints-12.jpg",
                     fit: BoxFit.cover,
@@ -190,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen>
             child: postsList.length == 0
                 ? Text(
                     'No Book post are available',
-                    style: Theme.of(context).textTheme.title,
+                    style: Styles.headlineName,
                     textAlign: TextAlign.center,
                   )
                 : ListView.builder(
@@ -249,19 +239,19 @@ class _HomeScreenState extends State<HomeScreen>
                         height: 10.0,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30.0, right: 40.0),
+                        padding: const EdgeInsets.only(left: 35.0, right: 45.0),
                         child: Container(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
                               date,
-                              style: Theme.of(context).textTheme.subhead,
+                              style: Styles.headlineDescription,
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               time,
-                              style: Theme.of(context).textTheme.subhead,
+                              style: Styles.headlineDescription,
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -307,8 +297,7 @@ class _HomeScreenState extends State<HomeScreen>
                               children: <Widget>[
                                 Text(
                                   bookTitle,
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat', fontSize: 20.0),
+                                  style: Styles.titleText,
                                 ),
                               ],
                             ),
@@ -317,11 +306,7 @@ class _HomeScreenState extends State<HomeScreen>
                               height: 20.0,
                               child: Text(
                                 description,
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 15.0,
-                                  color: Colors.grey,
-                                ),
+                                style: Styles.descriptionText,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
@@ -353,8 +338,7 @@ class _HomeScreenState extends State<HomeScreen>
                           children: <Widget>[
                             Text(
                               price + ' KR',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat', fontSize: 20.0),
+                              style: Styles.priceText,
                             ),
                           ],
                         ),
@@ -397,7 +381,7 @@ class CustomListTitle extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       text,
-                      style: Styles.inactiveSeasonText,
+                      style: Styles.subMenuText,
                       textAlign: TextAlign.start,
                     ),
                   ),
