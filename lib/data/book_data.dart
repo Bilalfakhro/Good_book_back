@@ -6,6 +6,7 @@ class Posts {
   writer, 
   price, 
   location, 
+  name,
   date, 
   time;
 
@@ -16,6 +17,7 @@ class Posts {
     this.writer,
     this.price,
     this.location,
+    this.name,
     this.date,
     this.time,
   );

@@ -24,6 +24,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>
   String _bookWriter;
   String _bookPrice;
   String _bookLocation;
+  String _name;
 
   String url;
   final formKey = GlobalKey<FormState>();
@@ -74,6 +75,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>
       'Description': _bookDesc,
       'Price': _bookPrice,
       'Location': _bookLocation,
+      'Name': _name,
       "Date": date,
       'Time': time,
     };

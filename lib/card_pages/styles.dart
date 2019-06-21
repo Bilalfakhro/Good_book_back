@@ -105,6 +105,14 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
+    static const nameText = TextStyle(
+    color: Color.fromRGBO(255, 87, 34, 1), //Deep Orange Accent
+    fontFamily: 'NotoSans',
+    fontSize: 18.0,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
   static const headlineDescription = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.8),
     fontFamily: 'NotoSans',

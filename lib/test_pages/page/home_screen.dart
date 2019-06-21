@@ -62,38 +62,22 @@ class _HomeScreenState extends State<HomeScreen>
           CustomListTitle(Icons.person, 'Profile', () => {}),
           Divider(),
           CustomListTitle(Icons.cancel, 'Cancel', () => {}),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child: InkWell(
-              splashColor: Colors.deepOrangeAccent,
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, '/loginPage');
-              },
-              child: Container(
-                height: 44.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Icon(Icons.lock),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Log Out',
-                            style: Styles.subMenuText,
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Icon(Icons.arrow_right),
-                  ],
-                ),
+          SizedBox(
+            height: 50.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushNamed(context, '/loginPage');
+            },
+            child: SizedBox(
+              child: Icon(
+                Icons.lock,
+                size: 80,
+                color: Colors.deepOrangeAccent,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -117,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen>
           bookData[individualKey]['Description'],
           bookData[individualKey]['Price'],
           bookData[individualKey]['Location'],
+          bookData[individualKey]['Name'],
           bookData[individualKey]['Date'],
           bookData[individualKey]['Time'],
         );
@@ -138,15 +123,6 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  // void _signOut() async {
-  //   try {
-  //     await widget.auth.signOut();
-  //     widget.onSignedOut();
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     _animationController.forward();
@@ -159,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen>
             SliverAppBar(
               backgroundColor: Colors.white.withOpacity(0.5),
               expandedHeight: 200.0,
-//            floating: true,
+              floating: true,
               pinned: true,
               forceElevated: boxIsScrolled,
               flexibleSpace: FlexibleSpaceBar(
@@ -193,6 +169,7 @@ class _HomeScreenState extends State<HomeScreen>
                         postsList[index].writer,
                         postsList[index].price,
                         postsList[index].location,
+                        postsList[index].name,
                         postsList[index].date,
                         postsList[index].time,
                       );
@@ -211,6 +188,7 @@ class _HomeScreenState extends State<HomeScreen>
     String description,
     String price,
     String location,
+    String name,
     String date,
     String time,
   ) {
@@ -222,13 +200,21 @@ class _HomeScreenState extends State<HomeScreen>
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Detail(Posts(image, bookTitle,
-                        description, writer, price, location, time, date))));
+                    builder: (context) => Detail(Posts(
+                        image,
+                        bookTitle,
+                        description,
+                        writer,
+                        price,
+                        location,
+                        name,
+                        time,
+                        date))));
             print('Card tapped');
           },
           child: Center(
             child: Container(
-              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 60.0),
+              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 90.0),
               child: Stack(
                 overflow: Overflow.visible,
                 children: <Widget>[
@@ -262,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                       Container(
                         width: 300.0,
-                        height: 400.0,
+                        height: 300.0,
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             image: DecorationImage(
@@ -274,11 +260,11 @@ class _HomeScreenState extends State<HomeScreen>
                     ],
                   ),
                   Positioned(
-                    top: 370.0,
+                    top: 300.0,
                     left: 55.0,
                     child: Container(
                       width: 270.0,
-                      height: 90.0,
+                      height: 110.0,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
@@ -310,14 +296,25 @@ class _HomeScreenState extends State<HomeScreen>
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
-                            )
+                            ),
+                            SizedBox(height: 10.0),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  name,
+                                  style: Styles.nameText,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 240.0,
+                    top: 200.0,
                     right: 5.0,
                     child: Container(
                       width: 90.0,

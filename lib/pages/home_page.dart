@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
           bookData[individualKey]['Description'],
           bookData[individualKey]['Price'],
           bookData[individualKey]['Location'],
+          bookData[individualKey]['Name'],
           bookData[individualKey]['Date'],
           bookData[individualKey]['Time'],
         );
@@ -93,6 +94,7 @@ class _HomePageState extends State<HomePage> {
                       postsList[index].writer,
                       postsList[index].price,
                       postsList[index].location,
+                       postsList[index].name,
                       postsList[index].date,
                       postsList[index].time,
                     );
@@ -109,6 +111,7 @@ class _HomePageState extends State<HomePage> {
     String description,
     String price,
     String location,
+    String name,
     String date,
     String time,
   ) {
@@ -131,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                             writer,
                             price,
                             location,
+                            name,
                             time,
                             date))));
                 print('Card tapped');
